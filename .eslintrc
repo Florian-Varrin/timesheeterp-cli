@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "oclif",
+    "oclif-typescript",
+    "airbnb-base"
+  ],
+  "rules": {
+    "import/prefer-default-export": "off"
+  }
+}
