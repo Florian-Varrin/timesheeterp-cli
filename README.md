@@ -28,28 +28,25 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`tser hello [FILE]`](#tser-hello-file)
+* [`tser config [FILE]`](#tser-config-file)
 * [`tser help [COMMAND]`](#tser-help-command)
+* [`tser login`](#tser-login)
 
-## `tser hello [FILE]`
+## `tser config [FILE]`
 
 describe the command here
 
 ```
 USAGE
-  $ tser hello [FILE]
+  $ tser config [FILE]
 
 OPTIONS
   -f, --force
   -h, --help       show CLI help
   -n, --name=name  name to print
-
-EXAMPLE
-  $ tser hello
-  hello world from ./src/hello.ts!
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/config.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/config.ts)_
 
 ## `tser help [COMMAND]`
 
@@ -67,4 +64,15 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.1/src/commands/help.ts)_
+
+## `tser login`
+
+describe the command here
+
+```
+USAGE
+  $ tser login
+```
+
+_See code: [src/commands/login.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/login.ts)_
 <!-- commandsstop -->

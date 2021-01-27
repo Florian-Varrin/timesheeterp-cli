@@ -11,6 +11,12 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "@types/inquirer": "^7.3.1",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "inquirer": "^7.3.3",
+    "keytar": "^7.3.0",
+    "ts-transformer-keys": "^0.4.3",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -55,7 +61,7 @@
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md",
-    "lint": "eslint ./src/* --config .eslintrc --fix"
+    "lint": "eslint ./src/**/*.ts --config .eslintrc --fix"
   },
   "types": "lib/index.d.ts"
 }

@@ -5,6 +5,12 @@
     "airbnb-base"
   ],
   "rules": {
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "no-shadow": "off"
   }
 }
