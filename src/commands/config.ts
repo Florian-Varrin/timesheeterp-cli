@@ -3,6 +3,7 @@ import * as inquirer from 'inquirer';
 import { ConfigService } from '../modules/config/config.service';
 import Login from './login';
 import { DisplayService } from '../modules/common/display-service';
+import { ConfigTemplate } from '../modules/config/config.template';
 
 export default class ConfigCommand extends Command {
   static description = 'Configure the client'
@@ -12,16 +13,21 @@ export default class ConfigCommand extends Command {
     const displayService = new DisplayService(this);
 
     const currentContent = configService.getAllConfig();
+    const { fields: fieldsTemplate } = ConfigTemplate;
+
+    const questions = Object.keys(currentContent).map((key) => {
+      const fieldTemplate = fieldsTemplate.find((field) => field.name === key);
+
+      return {
+        type: 'input',
+        name: key,
+        message: fieldTemplate?.message || '',
+        default: currentContent[key],
+      };
+    });
 
     const answers = await inquirer
-      .prompt([
-        {
-          type: 'input',
-          name: 'apiUrl',
-          message: 'Api URL :',
-          default: currentContent.apiUrl,
-        },
-      ]);
+      .prompt(questions);
 
     configService.setAllConfig(answers);
 

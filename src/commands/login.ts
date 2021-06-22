@@ -18,7 +18,7 @@ export default class Login extends Command {
     const configService = new ConfigService(this);
     const displayService = new DisplayService(this);
 
-    const apiUrl = await configService.getAConfig('apiUrl');
+    const { host, apiVersion } = await configService.getAllConfig();
 
     const questions = [
       {
@@ -41,7 +41,8 @@ export default class Login extends Command {
 
     const { email, password } = answers;
 
-    await loginService.login(email || account, password, apiUrl as string);
+    const apiUrl = `${host}/api/v${apiVersion}`;
+    await loginService.login(email || account, password, apiUrl);
 
     displayService.displaySuccess('You are logged in');
   }
