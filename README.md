@@ -19,7 +19,7 @@ $ npm install -g timesheeter-cli
 $ tser COMMAND
 running command...
 $ tser (-v|--version|version)
-timesheeter-cli/0.0.0 win32-x64 node-v12.18.2
+timesheeter-cli/0.0.0 linux-x64 node-v12.18.2
 $ tser --help [COMMAND]
 USAGE
   $ tser COMMAND
@@ -28,22 +28,20 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`tser config [FILE]`](#tser-config-file)
+* [`tser config`](#tser-config)
 * [`tser help [COMMAND]`](#tser-help-command)
 * [`tser login`](#tser-login)
+* [`tser projects:create`](#tser-projectscreate)
+* [`tser projects:delete [FILE]`](#tser-projectsdelete-file)
+* [`tser projects:list [FILE]`](#tser-projectslist-file)
 
-## `tser config [FILE]`
+## `tser config`
 
-describe the command here
+Configure the client
 
 ```
 USAGE
-  $ tser config [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ tser config
 ```
 
 _See code: [src/commands/config.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/config.ts)_
@@ -67,12 +65,73 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.1
 
 ## `tser login`
 
-describe the command here
+Login to TimeSheetER
 
 ```
 USAGE
   $ tser login
+
+OPTIONS
+  -a, --account=account
 ```
 
 _See code: [src/commands/login.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/login.ts)_
+
+## `tser projects:create`
+
+create a project
+
+```
+USAGE
+  $ tser projects:create
+
+OPTIONS
+  -h, --hourRate=hourRate  hour rate the project
+  -n, --name=name          name of the project
+
+ALIASES
+  $ tser project:create
+```
+
+_See code: [src/commands/projects/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/create.ts)_
+
+## `tser projects:delete [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ tser projects:delete [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/delete.ts)_
+
+## `tser projects:list [FILE]`
+
+list projects
+
+```
+USAGE
+  $ tser projects:list [FILE]
+
+OPTIONS
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ tser project:list
+```
+
+_See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/list.ts)_
 <!-- commandsstop -->

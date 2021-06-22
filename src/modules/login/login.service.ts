@@ -2,7 +2,7 @@ import { Command } from '@oclif/command';
 import * as keytar from 'keytar';
 import axios from 'axios';
 import { ConfigService } from '../config/config.service';
-import { DisplayService } from '../common/display-service';
+import { DisplayService } from '../common/display.service';
 
 export class LoginService {
   private readonly serviceName: string;
@@ -26,7 +26,10 @@ export class LoginService {
     await keytar.setPassword(this.serviceName, email, accessToken);
   }
 
-  async getAccessToken(email: string): Promise<string | null> {
+  async getAccessToken(): Promise<string | null> {
+    const email = await this.configService.getAConfig('._email') as string;
+
+    if (!email) this.displayNeedToLogin();
     return keytar.getPassword(this.serviceName, email);
   }
 
@@ -44,11 +47,12 @@ export class LoginService {
 
       if (accessToken) {
         await this.storeAccessToken(email, accessToken);
+        await this.configService.setAConfig('._email', email);
       }
     } catch (error) {
       if (!error.response) {
         this.displayService.displayError(
-          'Unable to reach the server, please verify api url by running',
+          'Unable to reach the server, please verify host url and api version by running',
           'tser config',
         );
       }

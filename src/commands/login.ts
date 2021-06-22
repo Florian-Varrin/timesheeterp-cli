@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command';
 import * as inquirer from 'inquirer';
 import { ConfigService } from '../modules/config/config.service';
 import { LoginService } from '../modules/login/login.service';
-import { DisplayService } from '../modules/common/display-service';
+import { DisplayService } from '../modules/common/display.service';
 
 export default class Login extends Command {
   static description = 'Login to TimeSheetER';
