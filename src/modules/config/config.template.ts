@@ -5,11 +5,21 @@ export class ConfigTemplate {
     name: string;
     required: boolean;
     type: jsonValuesTypes;
+    message: string;
+    default?: string;
   }[] = [
     {
-      name: 'apiUrl',
+      name: 'host',
       required: true,
       type: 'string',
+      message: 'Host URL :',
+    },
+    {
+      name: 'apiVersion',
+      required: true,
+      type: 'string',
+      message: 'API version :',
+      default: '1',
     },
   ];
 }
@@ -17,5 +27,6 @@ export class ConfigTemplate {
 export interface ConfigInterface {
   [key: string]: jsonValuesTypes;
 
-  apiUrl: string;
+  host: string;
+  apiVersion: string;
 }

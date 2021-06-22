@@ -59,9 +59,12 @@ export class ConfigService {
     fields.forEach((field) => {
       if (onlyRequired && !field.required) return;
 
-      content[field.name] = '';
+      content[field.name] = field.default
+        ? field.default
+        : '';
     });
 
+    if (!fs.existsSync(this.configDirPath)) fs.mkdirSync(this.configDirPath);
     fs.writeFileSync(this.filePath, JSON.stringify(content));
   }
 
