@@ -25,11 +25,11 @@ export default class TimesAdd extends Command {
   async run() {
     let {
       'project-id': projectId,
-      duration,
       description,
       date,
       today,
     } = this.parse(TimesAdd).flags;
+    const { duration } = this.parse(TimesAdd).flags;
 
     const projectService = new ProjectsService(this);
     const dateService = new DateService(this);
