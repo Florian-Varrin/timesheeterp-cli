@@ -21,24 +21,7 @@ export default class ProjectsDelete extends Command {
     const projectService = new ProjectsService(this);
 
     if (!id) {
-      const projects = await projectService.get();
-      const choices = projects.map((project: {
-        id: number;
-        name: string;
-        // eslint-disable-next-line camelcase
-        user_id: number;
-        // eslint-disable-next-line camelcase
-        hour_rate: number;
-      }) => ({
-        name: `${project.id} | ${project.name}`,
-        value: project.id,
-      }));
-
-      const { project } = await inquirer.prompt({
-        type: 'list',
-        name: 'project',
-        choices,
-      });
+      const project = await projectService.select();
 
       id = project.toString();
     }
@@ -48,6 +31,7 @@ export default class ProjectsDelete extends Command {
         type: 'confirm',
         name: 'validated',
         message: `Are you sure you want to delete project ${id}?`,
+        default: false,
       });
 
       if (!validated) displayService.displayError('Deletion aborted');
