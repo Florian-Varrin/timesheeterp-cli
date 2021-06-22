@@ -32,7 +32,8 @@ USAGE
 * [`tser help [COMMAND]`](#tser-help-command)
 * [`tser login`](#tser-login)
 * [`tser projects:create`](#tser-projectscreate)
-* [`tser projects:delete [FILE]`](#tser-projectsdelete-file)
+* [`tser projects:delete`](#tser-projectsdelete)
+* [`tser projects:edit [FILE]`](#tser-projectsedit-file)
 * [`tser projects:list [FILE]`](#tser-projectslist-file)
 
 ## `tser config`
@@ -91,17 +92,37 @@ OPTIONS
 
 ALIASES
   $ tser project:create
+  $ tser prj:create
 ```
 
 _See code: [src/commands/projects/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/create.ts)_
 
-## `tser projects:delete [FILE]`
+## `tser projects:delete`
+
+delete a project
+
+```
+USAGE
+  $ tser projects:delete
+
+OPTIONS
+  --force
+  --id=id  Id of the project
+
+ALIASES
+  $ tser project:delete
+  $ tser prj:delete
+```
+
+_See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/delete.ts)_
+
+## `tser projects:edit [FILE]`
 
 describe the command here
 
 ```
 USAGE
-  $ tser projects:delete [FILE]
+  $ tser projects:edit [FILE]
 
 OPTIONS
   -f, --force
@@ -109,7 +130,7 @@ OPTIONS
   -n, --name=name  name to print
 ```
 
-_See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/delete.ts)_
+_See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/edit.ts)_
 
 ## `tser projects:list [FILE]`
 
@@ -131,6 +152,7 @@ OPTIONS
 
 ALIASES
   $ tser project:list
+  $ tser prj:list
 ```
 
 _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/list.ts)_

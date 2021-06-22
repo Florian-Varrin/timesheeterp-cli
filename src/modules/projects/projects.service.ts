@@ -5,6 +5,8 @@ import { ConfigService } from '../config/config.service';
 import { LoginService } from '../login/login.service';
 import { DisplayService } from '../common/display.service';
 import { HttpService } from '../common/http.service';
+import * as inquirer from 'inquirer';
+import { ProjectType } from './project.type';
 
 export class ProjectsService {
   private readonly apiUrl: string;
@@ -48,12 +50,44 @@ export class ProjectsService {
     }
   }
 
-  async get() {
+  async select(idOnly = true): Promise<number | ProjectType> {
+    const projects = await this.getAll();
+    const choices = projects.map((project: ProjectType) => ({
+      name: `${project.id} | ${project.name}`,
+      value: idOnly ? project.id : project,
+    }));
+
+    const { project } = await inquirer.prompt({
+      type: 'list',
+      name: 'project',
+      choices,
+    });
+
+    return project;
+  }
+
+  async getAll(): Promise<ProjectType[]> {
     try {
       const headers = await this.httpService.getAuthHeaders();
       const result = await axios({
         method: 'GET',
         url: this.apiUrl,
+        headers,
+      });
+
+      return result.data;
+    } catch (error) {
+      this.displayService.displayError('An error occurred');
+      return [];
+    }
+  }
+
+  async get(id: number): Promise<ProjectType | null> {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+      const result = await axios({
+        method: 'GET',
+        url: `${this.apiUrl}/${id}`,
         headers,
       });
 
@@ -81,10 +115,28 @@ export class ProjectsService {
     }
   }
 
+  async update(id: number, project: ProjectType) {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+      const result = await axios({
+        method: 'PATCH',
+        url: `${this.apiUrl}/${id}`,
+        headers,
+        data: project,
+      });
+
+      if (result.status !== 200) throw new Error('An error occurred');
+
+      this.displayService.displaySuccess(`Project with id "${id}" edited`);
+    } catch (error) {
+      this.displayService.displayError('An error occurred');
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   async list(flags: import('cli-ux/lib/styled/table').table.Options) {
     try {
-      const projects = await this.get();
+      const projects = await this.getAll();
 
       cli.table(projects, {
         id: {
