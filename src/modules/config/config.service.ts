@@ -3,7 +3,7 @@ import * as path from 'path';
 import { Command } from '@oclif/command';
 import { ConfigInterface, ConfigTemplate } from './config.template';
 import { jsonStructureType } from '../../types/json.types';
-import { DisplayService } from '../common/display-service';
+import { DisplayService } from '../common/display.service';
 
 export class ConfigService {
   private readonly configDirPath: string;
@@ -33,7 +33,7 @@ export class ConfigService {
     if (!this.hasConfigFile()) this.displayNeedToConfigure();
 
     // @ts-ignore
-    const content = await this.getAllConfig();
+    const content = await this.getAllConfig(true);
 
     if (!content[config]) this.displayNeedToConfigure();
 
@@ -68,11 +68,21 @@ export class ConfigService {
     fs.writeFileSync(this.filePath, JSON.stringify(content));
   }
 
-  getAllConfig(): ConfigInterface {
+  getAllConfig(withHidden = false): ConfigInterface {
     if (!this.hasConfigFile()) this.createEmptyConfig();
 
     // @ts-ignore
-    return JSON.parse(fs.readFileSync(this.filePath));
+    const config = JSON.parse(fs.readFileSync(this.filePath));
+
+    if (withHidden) return config;
+
+    const filteredConfig = {};
+    Object.keys(config).forEach((key) => {
+      // @ts-ignore
+      if (!key.startsWith('._')) filteredConfig[key] = config[key];
+    });
+
+    return filteredConfig as ConfigInterface;
   }
 
   setAllConfig(content: ConfigInterface): void {

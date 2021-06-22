@@ -2,7 +2,7 @@ import { Command } from '@oclif/command';
 import * as inquirer from 'inquirer';
 import { ConfigService } from '../modules/config/config.service';
 import Login from './login';
-import { DisplayService } from '../modules/common/display-service';
+import { DisplayService } from '../modules/common/display.service';
 import { ConfigTemplate } from '../modules/config/config.template';
 
 export default class ConfigCommand extends Command {
