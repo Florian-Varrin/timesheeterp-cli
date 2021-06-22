@@ -36,6 +36,7 @@ USAGE
 * [`tser projects:edit [FILE]`](#tser-projectsedit-file)
 * [`tser projects:list [FILE]`](#tser-projectslist-file)
 * [`tser times:add [FILE]`](#tser-timesadd-file)
+* [`tser times:get [FILE]`](#tser-timesget-file)
 
 ## `tser config`
 
@@ -162,11 +163,32 @@ _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/tim
 
 ## `tser times:add [FILE]`
 
-describe the command here
+add a time to a project
 
 ```
 USAGE
   $ tser times:add [FILE]
+
+OPTIONS
+  --date=date                time's date
+  --description=description  time's description
+  --duration=duration        time's duration in decimal
+  --project-id=project-id    Id of the project
+  --today                    add time for today
+
+ALIASES
+  $ tser time:add
+```
+
+_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/add.ts)_
+
+## `tser times:get [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ tser times:get [FILE]
 
 OPTIONS
   -f, --force
@@ -174,5 +196,5 @@ OPTIONS
   -n, --name=name  name to print
 ```
 
-_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/add.ts)_
+_See code: [src/commands/times/get.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/get.ts)_
 <!-- commandsstop -->

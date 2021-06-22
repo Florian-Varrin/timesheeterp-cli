@@ -18,6 +18,7 @@ export default class ProjectsList extends Command {
 
     const projectService = new ProjectsService(this);
 
-    await projectService.list(flags);
+    const projects = await projectService.getAll();
+    await projectService.list(projects, flags);
   }
 }

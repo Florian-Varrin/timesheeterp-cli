@@ -134,10 +134,8 @@ export class ProjectsService {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async list(flags: import('cli-ux/lib/styled/table').table.Options) {
+  async list(projects: ProjectType[], flags: import('cli-ux/lib/styled/table').table.Options) {
     try {
-      const projects = await this.getAll();
-
       cli.table(projects, {
         id: {
           header: 'ID',

@@ -8,7 +8,7 @@ import { DisplayService } from '../../modules/common/display.service';
 import { TimeType } from '../../modules/times/time.type';
 
 export default class TimesAdd extends Command {
-  static description = 'describe the command here';
+  static description = 'add a time to a project';
 
   static aliases = ['time:add'];
 
