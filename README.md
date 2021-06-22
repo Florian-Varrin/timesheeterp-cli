@@ -35,6 +35,7 @@ USAGE
 * [`tser projects:delete`](#tser-projectsdelete)
 * [`tser projects:edit [FILE]`](#tser-projectsedit-file)
 * [`tser projects:list [FILE]`](#tser-projectslist-file)
+* [`tser times:add [FILE]`](#tser-timesadd-file)
 
 ## `tser config`
 
@@ -118,16 +119,18 @@ _See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/t
 
 ## `tser projects:edit [FILE]`
 
-describe the command here
+edit a project
 
 ```
 USAGE
   $ tser projects:edit [FILE]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  --id=id  Id of the project
+
+ALIASES
+  $ tser project:edit
+  $ tser prj:edit
 ```
 
 _See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/edit.ts)_
@@ -156,4 +159,20 @@ ALIASES
 ```
 
 _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/list.ts)_
+
+## `tser times:add [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ tser times:add [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/add.ts)_
 <!-- commandsstop -->
