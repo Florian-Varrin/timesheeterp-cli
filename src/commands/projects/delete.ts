@@ -9,7 +9,7 @@ export default class ProjectsDelete extends Command {
   static aliases = ['project:delete', 'prj:delete'];
 
   static flags = {
-    id: flags.string({ description: 'Id of the project' }),
+    id: flags.integer({ description: 'Id of the project' }),
     force: flags.boolean({ default: false }),
   };
 
@@ -21,9 +21,7 @@ export default class ProjectsDelete extends Command {
     const projectService = new ProjectsService(this);
 
     if (!id) {
-      const project = await projectService.select();
-
-      id = project.toString();
+      id = await projectService.select() as number;
     }
 
     if (!force) {
@@ -35,8 +33,8 @@ export default class ProjectsDelete extends Command {
       });
 
       if (!validated) displayService.displayError('Deletion aborted');
-
-      await projectService.delete(Number(id));
     }
+
+    await projectService.delete(id);
   }
 }

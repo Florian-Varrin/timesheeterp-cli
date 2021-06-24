@@ -10,7 +10,7 @@ export default class ProjectsEdit extends Command {
   static aliases = ['project:edit', 'prj:edit'];
 
   static flags = {
-    id: flags.string({ description: 'Id of the project' }),
+    id: flags.integer({ description: 'Id of the project' }),
   };
 
   static args = [{ name: 'file' }];

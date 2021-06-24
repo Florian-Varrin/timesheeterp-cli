@@ -30,7 +30,12 @@ export class LoginService {
     const email = await this.configService.getAConfig('._email') as string;
 
     if (!email) this.displayNeedToLogin();
-    return keytar.getPassword(this.serviceName, email);
+
+    const accessToken = keytar.getPassword(this.serviceName, email);
+
+    if (!accessToken) this.displayNeedToLogin();
+
+    return accessToken;
   }
 
   async login(email: string, password: string, apiUrl: string): Promise<void> {

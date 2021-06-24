@@ -35,6 +35,10 @@ USAGE
 * [`tser projects:delete`](#tser-projectsdelete)
 * [`tser projects:edit [FILE]`](#tser-projectsedit-file)
 * [`tser projects:list [FILE]`](#tser-projectslist-file)
+* [`tser times:add [FILE]`](#tser-timesadd-file)
+* [`tser times:delete [FILE]`](#tser-timesdelete-file)
+* [`tser times:edit`](#tser-timesedit)
+* [`tser times:get`](#tser-timesget)
 
 ## `tser config`
 
@@ -118,16 +122,18 @@ _See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/t
 
 ## `tser projects:edit [FILE]`
 
-describe the command here
+edit a project
 
 ```
 USAGE
   $ tser projects:edit [FILE]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  --id=id  Id of the project
+
+ALIASES
+  $ tser project:edit
+  $ tser prj:edit
 ```
 
 _See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/edit.ts)_
@@ -156,4 +162,83 @@ ALIASES
 ```
 
 _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/projects/list.ts)_
+
+## `tser times:add [FILE]`
+
+add a time to a project
+
+```
+USAGE
+  $ tser times:add [FILE]
+
+OPTIONS
+  -p, --project-id=project-id  Id of the project
+  --date=date                  time's date
+  --description=description    time's description
+  --duration=duration          time's duration in decimal
+  --today                      add time for today
+
+ALIASES
+  $ tser time:add
+```
+
+_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/add.ts)_
+
+## `tser times:delete [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ tser times:delete [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/times/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/delete.ts)_
+
+## `tser times:edit`
+
+describe the command here
+
+```
+USAGE
+  $ tser times:edit
+
+OPTIONS
+  -p, --project-id=project-id  Id of the project
+  -t, --time-id=time-id        Id of the time
+```
+
+_See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/edit.ts)_
+
+## `tser times:get`
+
+get times for a project
+
+```
+USAGE
+  $ tser times:get
+
+OPTIONS
+  -e, --end=end                End date of the query
+  -p, --project-id=project-id  Id of the project
+  -s, --start=start            Start date of the query
+  -x, --extended               show extra columns
+  --columns=columns            only show provided columns (comma-separated)
+  --csv                        output is csv format [alias: --output=csv]
+  --filter=filter              filter property by partial string matching, ex: name=foo
+  --no-header                  hide table header from output
+  --no-truncate                do not truncate output to fit screen
+  --output=csv|json|yaml       output in a more machine friendly format
+  --sort=sort                  property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ tser time:get
+```
+
+_See code: [src/commands/times/get.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/get.ts)_
 <!-- commandsstop -->
