@@ -36,7 +36,7 @@ USAGE
 * [`tser projects:edit [FILE]`](#tser-projectsedit-file)
 * [`tser projects:list [FILE]`](#tser-projectslist-file)
 * [`tser times:add [FILE]`](#tser-timesadd-file)
-* [`tser times:delete [FILE]`](#tser-timesdelete-file)
+* [`tser times:delete`](#tser-timesdelete)
 * [`tser times:edit`](#tser-timesedit)
 * [`tser times:get`](#tser-timesget)
 
@@ -184,25 +184,28 @@ ALIASES
 
 _See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/add.ts)_
 
-## `tser times:delete [FILE]`
+## `tser times:delete`
 
-describe the command here
+edit a time
 
 ```
 USAGE
-  $ tser times:delete [FILE]
+  $ tser times:delete
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -p, --project-id=project-id  Id of the project
+  -t, --time-id=time-id        Id of the time
+  --force
+
+ALIASES
+  $ tser time:delete
 ```
 
 _See code: [src/commands/times/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/delete.ts)_
 
 ## `tser times:edit`
 
-describe the command here
+edit a time
 
 ```
 USAGE
@@ -211,6 +214,9 @@ USAGE
 OPTIONS
   -p, --project-id=project-id  Id of the project
   -t, --time-id=time-id        Id of the time
+
+ALIASES
+  $ tser time:add
 ```
 
 _See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.0.0/src/commands/times/edit.ts)_
