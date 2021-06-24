@@ -10,7 +10,7 @@ export default class TimesGet extends Command {
   static aliases = ['time:get'];
 
   static flags = {
-    'project-id': flags.integer({ description: 'Id of the project' }),
+    'project-id': flags.integer({ char: 'p', description: 'Id of the project' }),
     start: flags.string({ char: 's', description: 'Start date of the query' }),
     end: flags.string({ char: 'e', description: 'End date of the query' }),
     ...cli.table.flags(),
@@ -27,7 +27,7 @@ export default class TimesGet extends Command {
       ? await projectService.get(Number(projectId)) as ProjectType
       : await projectService.select(false) as ProjectType;
 
-    let times = await timeService.get(project.id);
+    let times = await timeService.getAll(project.id);
 
     if (start) {
       const startDate = new Date(start).getTime();

@@ -7,6 +7,8 @@ import { LoginService } from '../login/login.service';
 import axios from 'axios';
 import { cli } from 'cli-ux';
 import { ProjectType } from '../projects/project.type';
+import * as inquirer from 'inquirer';
+import { ProjectsService } from '../projects/projects.service';
 
 export class TimesService {
   private readonly apiUrl: string;
@@ -47,7 +49,23 @@ export class TimesService {
     }
   }
 
-  async get(projectId: number, start?: string, end?: string): Promise<TimeType[]> {
+  async get(projectId: number, timeId: number): Promise<TimeType | null> {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+      const result = await axios({
+        method: 'GET',
+        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
+        headers,
+      });
+
+      return result.data;
+    } catch (error) {
+      this.displayService.displayError(error.toString());
+      return null;
+    }
+  }
+
+  async getAll(projectId: number): Promise<TimeType[]> {
     try {
       const headers = await this.httpService.getAuthHeaders();
       const result = await axios({
@@ -60,6 +78,58 @@ export class TimesService {
     } catch (error) {
       this.displayService.displayError(error.toString() || 'An unknown error occurred');
       return [];
+    }
+  }
+
+  async select(idOnly = true, projectId: number): Promise<number | TimeType> {
+    const times = await this.getAll(projectId);
+
+    const choices = times.map((time: TimeType) => ({
+      name: `${time.id} | ${time.description} (${time.duration})`,
+      value: idOnly ? time.id : time,
+    }));
+
+    const { time } = await inquirer.prompt({
+      type: 'list',
+      name: 'time',
+      choices,
+    });
+
+    return time;
+  }
+
+  async update(projectId: number, timeId: number, time: TimeType) {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+      const result = await axios({
+        method: 'PATCH',
+        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
+        headers,
+        data: time,
+      });
+
+      if (result.status !== 200) throw new Error('An error occurred');
+
+      this.displayService.displaySuccess(`Time with id "${timeId}" edited`);
+    } catch (error) {
+      this.displayService.displayError('An error occurred');
+    }
+  }
+
+  async delete(projectId: number, timeId: number) {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+      const result = await axios({
+        method: 'DELETE',
+        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
+        headers,
+      });
+
+      if (result.status !== 204) throw new Error('An error occured');
+
+      this.displayService.displaySuccess(`Project with id "${timeId}" deleted`);
+    } catch (error) {
+      this.displayService.displayError('An error occurred');
     }
   }
 
@@ -88,7 +158,7 @@ export class TimesService {
         },
         date: {
           header: 'DATE',
-          minWidth: 10,
+          minWidth: 15,
         },
         duration: {
           header: 'DURATION',
@@ -96,7 +166,7 @@ export class TimesService {
         },
         description: {
           header: 'DESCRIPTION',
-          minWidth: 25,
+          minWidth: 45,
         },
       }, {
         printLine: this.oclifContext.log,

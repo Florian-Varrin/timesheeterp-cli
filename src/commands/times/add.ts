@@ -13,7 +13,7 @@ export default class TimesAdd extends Command {
   static aliases = ['time:add'];
 
   static flags = {
-    'project-id': flags.integer({ description: 'Id of the project' }),
+    'project-id': flags.integer({ char: 'p', description: 'Id of the project' }),
     duration: flags.string({ description: 'time\'s duration in decimal' }),
     description: flags.string({ description: 'time\'s description' }),
     date: flags.string({ description: 'time\'s date' }),

@@ -33,8 +33,8 @@ export default class ProjectsDelete extends Command {
       });
 
       if (!validated) displayService.displayError('Deletion aborted');
-
-      await projectService.delete(id);
     }
+
+    await projectService.delete(id);
   }
 }
