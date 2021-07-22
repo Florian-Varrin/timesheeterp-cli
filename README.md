@@ -19,7 +19,7 @@ $ npm install -g timesheeter-cli
 $ tser COMMAND
 running command...
 $ tser (-v|--version|version)
-timesheeter-cli/0.1.0 linux-x64 node-v12.18.2
+timesheeter-cli/0.1.0 linux-x64 node-v12.21.0
 $ tser --help [COMMAND]
 USAGE
   $ tser COMMAND
