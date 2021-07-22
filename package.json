@@ -1,7 +1,7 @@
 {
   "name": "timesheeter-cli",
   "description": "CLI client for TimeSheetER",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Florian Varrin @Florian-Varrin",
   "bin": {
     "tser": "bin/run"
@@ -10,7 +10,9 @@
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
+    "@oclif/plugin-autocomplete": "^0.3.0",
     "@oclif/plugin-help": "^3",
+    "@oclif/plugin-not-found": "^1.2.4",
     "@types/inquirer": "^7.3.1",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
@@ -52,7 +54,9 @@
     "commands": "./lib/commands",
     "bin": "tser",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-autocomplete"
     ]
   },
   "repository": "Florian-Varrin/timesheeter-cli",
