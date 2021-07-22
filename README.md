@@ -28,6 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`tser autocomplete [SHELL]`](#tser-autocomplete-shell)
 * [`tser config`](#tser-config)
 * [`tser help [COMMAND]`](#tser-help-command)
 * [`tser login`](#tser-login)
@@ -39,6 +40,29 @@ USAGE
 * [`tser times:delete`](#tser-timesdelete)
 * [`tser times:edit`](#tser-timesedit)
 * [`tser times:get`](#tser-timesget)
+
+## `tser autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ tser autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ tser autocomplete
+  $ tser autocomplete bash
+  $ tser autocomplete zsh
+  $ tser autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.3.0/src/commands/autocomplete/index.ts)_
 
 ## `tser config`
 
