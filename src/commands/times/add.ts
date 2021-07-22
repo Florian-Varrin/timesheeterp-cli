@@ -1,9 +1,8 @@
 import { Command, flags } from '@oclif/command';
+import * as inquirer from 'inquirer';
 import { ProjectsService } from '../../modules/projects/projects.service';
 import { DateService } from '../../modules/common/date.service';
-import * as inquirer from 'inquirer';
 import { TimesService } from '../../modules/times/times.service';
-import { string } from '@oclif/command/lib/flags';
 import { DisplayService } from '../../modules/common/display.service';
 import { TimeType } from '../../modules/times/time.type';
 
@@ -41,7 +40,7 @@ export default class TimesAdd extends Command {
       projectId = await projectService.select(true) as number;
     }
 
-    if (!today) {
+    if (!today && !date) {
       const { today: todayAnswer } = await inquirer.prompt([
         {
           type: 'confirm',
