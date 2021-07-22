@@ -1,10 +1,10 @@
 {
   "name": "timesheeter-cli",
   "description": "CLI client for TimeSheetER",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Florian Varrin @Florian-Varrin",
   "bin": {
-    "tser": "./bin/run"
+    "tser": "bin/run"
   },
   "bugs": "https://github.com/Florian-Varrin/timesheeter-cli/issues",
   "dependencies": {
