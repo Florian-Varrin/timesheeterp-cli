@@ -1,9 +1,8 @@
 import { Command, flags } from '@oclif/command';
-import { ProjectType } from '../../modules/projects/project.type';
+import * as inquirer from 'inquirer';
 import { ProjectsService } from '../../modules/projects/projects.service';
 import { TimesService } from '../../modules/times/times.service';
 import { TimeType } from '../../modules/times/time.type';
-import * as inquirer from 'inquirer';
 
 export default class TimesEdit extends Command {
   static description = 'edit a time';
@@ -38,7 +37,7 @@ export default class TimesEdit extends Command {
           default: time.description,
         },
         {
-          type: 'number',
+          type: 'input',
           name: 'date',
           default: time.date,
         },
