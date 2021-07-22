@@ -19,7 +19,7 @@ $ npm install -g timesheeter-cli
 $ tser COMMAND
 running command...
 $ tser (-v|--version|version)
-timesheeter-cli/0.1.1 linux-x64 node-v12.21.0
+timesheeter-cli/0.1.2 linux-x64 node-v12.21.0
 $ tser --help [COMMAND]
 USAGE
   $ tser COMMAND
@@ -49,7 +49,7 @@ USAGE
   $ tser config
 ```
 
-_See code: [src/commands/config.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/config.ts)_
+_See code: [src/commands/config.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/config.ts)_
 
 ## `tser help [COMMAND]`
 
@@ -80,7 +80,7 @@ OPTIONS
   -a, --account=account
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/login.ts)_
 
 ## `tser projects:create`
 
@@ -99,7 +99,7 @@ ALIASES
   $ tser prj:create
 ```
 
-_See code: [src/commands/projects/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/projects/create.ts)_
+_See code: [src/commands/projects/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/create.ts)_
 
 ## `tser projects:delete`
 
@@ -118,7 +118,7 @@ ALIASES
   $ tser prj:delete
 ```
 
-_See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/projects/delete.ts)_
+_See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/delete.ts)_
 
 ## `tser projects:edit [FILE]`
 
@@ -136,7 +136,7 @@ ALIASES
   $ tser prj:edit
 ```
 
-_See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/projects/edit.ts)_
+_See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/edit.ts)_
 
 ## `tser projects:list [FILE]`
 
@@ -161,7 +161,7 @@ ALIASES
   $ tser prj:list
 ```
 
-_See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/projects/list.ts)_
+_See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/list.ts)_
 
 ## `tser times:add [FILE]`
 
@@ -182,7 +182,7 @@ ALIASES
   $ tser time:add
 ```
 
-_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/times/add.ts)_
+_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/add.ts)_
 
 ## `tser times:delete`
 
@@ -201,7 +201,7 @@ ALIASES
   $ tser time:delete
 ```
 
-_See code: [src/commands/times/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/times/delete.ts)_
+_See code: [src/commands/times/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/delete.ts)_
 
 ## `tser times:edit`
 
@@ -219,7 +219,7 @@ ALIASES
   $ tser time:add
 ```
 
-_See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/times/edit.ts)_
+_See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/edit.ts)_
 
 ## `tser times:get`
 
@@ -246,5 +246,5 @@ ALIASES
   $ tser time:get
 ```
 
-_See code: [src/commands/times/get.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.1/src/commands/times/get.ts)_
+_See code: [src/commands/times/get.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/get.ts)_
 <!-- commandsstop -->
