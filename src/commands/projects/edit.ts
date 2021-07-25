@@ -13,8 +13,6 @@ export default class ProjectsEdit extends Command {
     id: flags.integer({ description: 'Id of the project' }),
   };
 
-  static args = [{ name: 'file' }];
-
   async run() {
     const { id } = this.parse(ProjectsEdit).flags;
 

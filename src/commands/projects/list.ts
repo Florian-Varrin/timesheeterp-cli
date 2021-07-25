@@ -11,8 +11,6 @@ export default class ProjectsList extends Command {
     ...cli.table.flags(),
   }
 
-  static args = [{ name: 'file' }];
-
   async run() {
     const { flags } = this.parse(ProjectsList);
 

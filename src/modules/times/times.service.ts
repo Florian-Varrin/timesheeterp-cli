@@ -1,35 +1,16 @@
 import { Command } from '@oclif/command';
 import { TimeType } from './time.type';
-import { HttpService } from '../common/http.service';
-import { DisplayService } from '../common/display.service';
-import { ConfigService } from '../config/config.service';
-import { LoginService } from '../login/login.service';
 import axios from 'axios';
 import { cli } from 'cli-ux';
 import { ProjectType } from '../projects/project.type';
 import * as inquirer from 'inquirer';
-import { ProjectsService } from '../projects/projects.service';
+import { AbstractService } from '../common/abstract.service';
 
-export class TimesService {
-  private readonly apiUrl: string;
+export class TimesService extends AbstractService {
+  constructor(protected oclifContext: Command) {
+    super(oclifContext);
 
-  private displayService: DisplayService;
-
-  private configService: ConfigService;
-
-  private loginService: LoginService;
-
-  private httpService: HttpService;
-
-  constructor(private oclifContext: Command) {
-    this.displayService = new DisplayService(oclifContext);
-    this.configService = new ConfigService(oclifContext);
-    this.loginService = new LoginService(oclifContext);
-    this.httpService = new HttpService(oclifContext);
-
-    const { host, apiVersion } = this.configService.getAllConfig();
-
-    this.apiUrl = `${host}/api/v${apiVersion}/projects`;
+    this.apiUrl += 'projects';
   }
 
   async create(projectId: number, time: TimeType): Promise<TimeType | null> {

@@ -1,33 +1,15 @@
 import { Command } from '@oclif/command';
 import axios from 'axios';
-import { cli } from 'cli-ux'
-import { ConfigService } from '../config/config.service';
-import { LoginService } from '../login/login.service';
-import { DisplayService } from '../common/display.service';
-import { HttpService } from '../common/http.service';
+import { cli } from 'cli-ux';
 import * as inquirer from 'inquirer';
 import { ProjectType } from './project.type';
+import { AbstractService } from '../common/abstract.service';
 
-export class ProjectsService {
-  private readonly apiUrl: string;
+export class ProjectsService extends AbstractService {
+  constructor(protected oclifContext: Command) {
+    super(oclifContext);
 
-  private displayService: DisplayService;
-
-  private configService: ConfigService;
-
-  private loginService: LoginService;
-
-  private httpService: HttpService;
-
-  constructor(private oclifContext: Command) {
-    this.displayService = new DisplayService(oclifContext);
-    this.configService = new ConfigService(oclifContext);
-    this.loginService = new LoginService(oclifContext);
-    this.httpService = new HttpService(oclifContext);
-
-    const { host, apiVersion } = this.configService.getAllConfig();
-
-    this.apiUrl = `${host}/api/v${apiVersion}/projects`;
+    this.apiUrl += 'projects';
   }
 
   // eslint-disable-next-line consistent-return
