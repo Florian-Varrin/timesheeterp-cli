@@ -7,7 +7,7 @@ import { ProjectType } from '../../modules/projects/project.type';
 export default class TimesGet extends Command {
   static description = 'get times for a project';
 
-  static aliases = ['time:get'];
+  static aliases = ['time:list'];
 
   static flags = {
     'project-id': flags.integer({ char: 'p', description: 'Id of the project' }),

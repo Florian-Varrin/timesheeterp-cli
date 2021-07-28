@@ -1,14 +1,13 @@
 import { Command } from '@oclif/command';
+import axios from 'axios';
+import { cli } from 'cli-ux';
+import * as inquirer from 'inquirer';
 import { TimeType } from './time.type';
 import { HttpService } from '../common/http.service';
 import { DisplayService } from '../common/display.service';
 import { ConfigService } from '../config/config.service';
 import { LoginService } from '../login/login.service';
-import axios from 'axios';
-import { cli } from 'cli-ux';
 import { ProjectType } from '../projects/project.type';
-import * as inquirer from 'inquirer';
-import { ProjectsService } from '../projects/projects.service';
 
 export class TimesService {
   private readonly apiUrl: string;

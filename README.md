@@ -29,17 +29,23 @@ USAGE
 # Commands
 <!-- commands -->
 * [`tser autocomplete [SHELL]`](#tser-autocomplete-shell)
+* [`tser clocks:create`](#tser-clockscreate)
+* [`tser clocks:delete`](#tser-clocksdelete)
+* [`tser clocks:edit`](#tser-clocksedit)
+* [`tser clocks:list`](#tser-clockslist)
+* [`tser clocks:start`](#tser-clocksstart)
+* [`tser clocks:stop [FILE]`](#tser-clocksstop-file)
 * [`tser config`](#tser-config)
 * [`tser help [COMMAND]`](#tser-help-command)
 * [`tser login`](#tser-login)
 * [`tser projects:create`](#tser-projectscreate)
 * [`tser projects:delete`](#tser-projectsdelete)
-* [`tser projects:edit [FILE]`](#tser-projectsedit-file)
-* [`tser projects:list [FILE]`](#tser-projectslist-file)
-* [`tser times:add [FILE]`](#tser-timesadd-file)
+* [`tser projects:edit`](#tser-projectsedit)
+* [`tser projects:list`](#tser-projectslist)
+* [`tser times:create [FILE]`](#tser-timescreate-file)
 * [`tser times:delete`](#tser-timesdelete)
 * [`tser times:edit`](#tser-timesedit)
-* [`tser times:get`](#tser-timesget)
+* [`tser times:list`](#tser-timeslist)
 
 ## `tser autocomplete [SHELL]`
 
@@ -63,6 +69,120 @@ EXAMPLES
 ```
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.3.0/src/commands/autocomplete/index.ts)_
+
+## `tser clocks:create`
+
+create a clock
+
+```
+USAGE
+  $ tser clocks:create
+
+OPTIONS
+  -n, --name=name  name of the clock
+
+ALIASES
+  $ tser clock:create
+  $ tser clk:create
+```
+
+_See code: [src/commands/clocks/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/create.ts)_
+
+## `tser clocks:delete`
+
+delete a clock
+
+```
+USAGE
+  $ tser clocks:delete
+
+OPTIONS
+  --force
+  --id=id  Id of the clock
+
+ALIASES
+  $ tser clock:delete
+  $ tser clk:delete
+```
+
+_See code: [src/commands/clocks/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/delete.ts)_
+
+## `tser clocks:edit`
+
+edit a clock
+
+```
+USAGE
+  $ tser clocks:edit
+
+OPTIONS
+  --id=id  Id of the clock
+
+ALIASES
+  $ tser clock:edit
+  $ tser clk:edit
+```
+
+_See code: [src/commands/clocks/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/edit.ts)_
+
+## `tser clocks:list`
+
+list clocks
+
+```
+USAGE
+  $ tser clocks:list
+
+OPTIONS
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ tser clock:list
+  $ tser clk:list
+```
+
+_See code: [src/commands/clocks/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/list.ts)_
+
+## `tser clocks:start`
+
+start a clock
+
+```
+USAGE
+  $ tser clocks:start
+
+OPTIONS
+  --id=id  Id of the clock
+
+ALIASES
+  $ tser clock:start
+  $ tser clk:start
+```
+
+_See code: [src/commands/clocks/start.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/start.ts)_
+
+## `tser clocks:stop [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ tser clocks:stop [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/clocks/stop.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/stop.ts)_
 
 ## `tser config`
 
@@ -144,13 +264,13 @@ ALIASES
 
 _See code: [src/commands/projects/delete.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/delete.ts)_
 
-## `tser projects:edit [FILE]`
+## `tser projects:edit`
 
 edit a project
 
 ```
 USAGE
-  $ tser projects:edit [FILE]
+  $ tser projects:edit
 
 OPTIONS
   --id=id  Id of the project
@@ -162,13 +282,13 @@ ALIASES
 
 _See code: [src/commands/projects/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/edit.ts)_
 
-## `tser projects:list [FILE]`
+## `tser projects:list`
 
 list projects
 
 ```
 USAGE
-  $ tser projects:list [FILE]
+  $ tser projects:list
 
 OPTIONS
   -x, --extended          show extra columns
@@ -187,13 +307,13 @@ ALIASES
 
 _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/list.ts)_
 
-## `tser times:add [FILE]`
+## `tser times:create [FILE]`
 
 add a time to a project
 
 ```
 USAGE
-  $ tser times:add [FILE]
+  $ tser times:create [FILE]
 
 OPTIONS
   -p, --project-id=project-id  Id of the project
@@ -206,7 +326,7 @@ ALIASES
   $ tser time:add
 ```
 
-_See code: [src/commands/times/add.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/add.ts)_
+_See code: [src/commands/times/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/create.ts)_
 
 ## `tser times:delete`
 
@@ -245,13 +365,13 @@ ALIASES
 
 _See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/edit.ts)_
 
-## `tser times:get`
+## `tser times:list`
 
 get times for a project
 
 ```
 USAGE
-  $ tser times:get
+  $ tser times:list
 
 OPTIONS
   -e, --end=end                End date of the query
@@ -270,5 +390,5 @@ ALIASES
   $ tser time:get
 ```
 
-_See code: [src/commands/times/get.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/get.ts)_
+_See code: [src/commands/times/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/list.ts)_
 <!-- commandsstop -->

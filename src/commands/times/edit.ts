@@ -12,7 +12,7 @@ export default class TimesEdit extends Command {
     'time-id': flags.integer({ char: 't', description: 'Id of the time' }),
   };
 
-  static aliases = ['time:add'];
+  static aliases = ['time:edit'];
 
   async run() {
     let { 'project-id': projectId } = this.parse(TimesEdit).flags;
