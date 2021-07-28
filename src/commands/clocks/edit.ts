@@ -3,6 +3,7 @@ import * as inquirer from 'inquirer';
 import { ProjectsService } from '../../modules/projects/projects.service';
 import { ProjectType } from '../../modules/projects/project.type';
 import { ClocksService } from '../../modules/clocks/clocks.service';
+import { ClocksType } from '../../modules/clocks/clocks.type';
 
 export default class ClocksEdit extends Command {
   static description = 'edit a clock';
@@ -19,10 +20,10 @@ export default class ClocksEdit extends Command {
     const clocksService = new ClocksService(this);
 
     const clock = id
-      ? await clocksService.get(Number(id)) as ProjectType
-      : await clocksService.select(false) as ProjectType;
+      ? await clocksService.get(Number(id)) as ClocksType
+      : await clocksService.select(false) as ClocksType;
 
-    const editedClock: ProjectType = {
+    const editedClock: ClocksType = {
       ...await inquirer.prompt([
         {
           type: 'input',
