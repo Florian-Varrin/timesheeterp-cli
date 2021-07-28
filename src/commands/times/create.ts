@@ -9,7 +9,7 @@ import { TimeType } from '../../modules/times/time.type';
 export default class TimesAdd extends Command {
   static description = 'add a time to a project';
 
-  static aliases = ['time:add'];
+  static aliases = ['time:create'];
 
   static flags = {
     'project-id': flags.integer({ char: 'p', description: 'Id of the project' }),

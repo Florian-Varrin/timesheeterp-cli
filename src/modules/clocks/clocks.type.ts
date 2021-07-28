@@ -10,3 +10,7 @@ export type ClocksType = {
   events: any[];
   status: 'RUNNING' | 'STOPPED';
 };
+
+export type ClocksCreateDto = {
+  name: string;
+};

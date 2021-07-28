@@ -16,7 +16,7 @@ export default class ClocksList extends Command {
 
     const clocksService = new ClocksService(this);
 
-    const projects = await clocksService.getAll();
-    await clocksService.list(projects, flags);
+    const clocks = await clocksService.getAll();
+    await clocksService.list(clocks, flags);
   }
 }

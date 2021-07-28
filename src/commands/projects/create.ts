@@ -36,10 +36,10 @@ export default class ProjectsCreate extends Command {
 
     const projectService = new ProjectsService(this);
 
-    const project = await projectService.create(
-      name || answers.name,
-      Number(hourRate) || Number(answers.hourRate),
-    );
+    const project = await projectService.create({
+      name: name || answers.name,
+      hour_rate: Number(hourRate) || Number(answers.hourRate),
+    });
 
     this.log(`Project "${project.name}" with id "${project.id}" was created`);
   }
