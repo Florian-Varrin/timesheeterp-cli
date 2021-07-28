@@ -34,7 +34,7 @@ USAGE
 * [`tser clocks:edit`](#tser-clocksedit)
 * [`tser clocks:list`](#tser-clockslist)
 * [`tser clocks:start`](#tser-clocksstart)
-* [`tser clocks:stop [FILE]`](#tser-clocksstop-file)
+* [`tser clocks:stop`](#tser-clocksstop)
 * [`tser config`](#tser-config)
 * [`tser help [COMMAND]`](#tser-help-command)
 * [`tser login`](#tser-login)
@@ -168,18 +168,20 @@ ALIASES
 
 _See code: [src/commands/clocks/start.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/start.ts)_
 
-## `tser clocks:stop [FILE]`
+## `tser clocks:stop`
 
-describe the command here
+stop a clock
 
 ```
 USAGE
-  $ tser clocks:stop [FILE]
+  $ tser clocks:stop
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  --id=id  Id of the clock
+
+ALIASES
+  $ tser clock:stop
+  $ tser clk:stop
 ```
 
 _See code: [src/commands/clocks/stop.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/stop.ts)_
@@ -323,7 +325,7 @@ OPTIONS
   --today                      add time for today
 
 ALIASES
-  $ tser time:add
+  $ tser time:create
 ```
 
 _See code: [src/commands/times/create.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/create.ts)_
@@ -360,7 +362,7 @@ OPTIONS
   -t, --time-id=time-id        Id of the time
 
 ALIASES
-  $ tser time:add
+  $ tser time:edit
 ```
 
 _See code: [src/commands/times/edit.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/edit.ts)_
@@ -387,7 +389,7 @@ OPTIONS
   --sort=sort                  property to sort by (prepend '-' for descending)
 
 ALIASES
-  $ tser time:get
+  $ tser time:list
 ```
 
 _See code: [src/commands/times/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/times/list.ts)_
