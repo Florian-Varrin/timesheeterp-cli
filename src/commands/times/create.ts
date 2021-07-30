@@ -19,8 +19,6 @@ export default class TimesAdd extends Command {
     today: flags.boolean({ description: 'add time for today' }),
   };
 
-  static args = [{ name: 'file' }];
-
   async run() {
     let {
       'project-id': projectId,

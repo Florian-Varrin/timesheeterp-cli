@@ -42,7 +42,7 @@ USAGE
 * [`tser projects:delete`](#tser-projectsdelete)
 * [`tser projects:edit`](#tser-projectsedit)
 * [`tser projects:list`](#tser-projectslist)
-* [`tser times:create [FILE]`](#tser-timescreate-file)
+* [`tser times:create`](#tser-timescreate)
 * [`tser times:delete`](#tser-timesdelete)
 * [`tser times:edit`](#tser-timesedit)
 * [`tser times:list`](#tser-timeslist)
@@ -309,13 +309,13 @@ ALIASES
 
 _See code: [src/commands/projects/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/projects/list.ts)_
 
-## `tser times:create [FILE]`
+## `tser times:create`
 
 add a time to a project
 
 ```
 USAGE
-  $ tser times:create [FILE]
+  $ tser times:create
 
 OPTIONS
   -p, --project-id=project-id  Id of the project
