@@ -1,6 +1,5 @@
 import { Command, flags } from '@oclif/command';
 import { ClocksService } from '../../modules/clocks/clocks.service';
-import { ProjectType } from '../../modules/projects/project.type';
 import { ClocksType } from '../../modules/clocks/clocks.type';
 
 export default class ClocksStart extends Command {
@@ -19,7 +18,7 @@ export default class ClocksStart extends Command {
 
     const clock = id
       ? await clocksService.get(Number(id)) as ClocksType
-      : await clocksService.select(false) as ClocksType;
+      : await clocksService.select(false, { status: 'stopped' }) as ClocksType;
 
     await clocksService.start(clock.id);
   }

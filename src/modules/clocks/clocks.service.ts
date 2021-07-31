@@ -70,4 +70,9 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
       this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
     }
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatSelectName(resource: ClocksType): string {
+    return `${super.formatSelectName(resource)} | ${resource.current_time_formatted} | ${resource.status}`;
+  }
 }

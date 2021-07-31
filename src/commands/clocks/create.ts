@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import * as inquirer from 'inquirer';
 import { ClocksService } from '../../modules/clocks/clocks.service';
+import { ClocksType } from '../../modules/clocks/clocks.type';
 
 export default class ClockCreate extends Command {
   static description = 'create a clock';
@@ -9,10 +10,11 @@ export default class ClockCreate extends Command {
 
   static flags = {
     name: flags.string({ char: 'n', description: 'name of the clock' }),
+    start: flags.boolean({ char: 's', description: 'Start the clock after creation', default: false }),
   };
 
   async run() {
-    const { name } = this.parse(ClockCreate).flags;
+    const { name, start } = this.parse(ClockCreate).flags;
 
     const questions = [];
     if (!name) {
@@ -27,8 +29,8 @@ export default class ClockCreate extends Command {
 
     const clocksService = new ClocksService(this);
 
-    const clock = await clocksService.create({ name: name || answers.name });
+    const clock: ClocksType = await clocksService.create({ name: name || answers.name });
 
-    this.log(`Clock "${clock.name}" with id "${clock.id}" was created`);
+    if (start) await clocksService.start(clock.id);
   }
 }

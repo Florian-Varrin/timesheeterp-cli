@@ -4,9 +4,9 @@ export type ClocksType = {
   // eslint-disable-next-line camelcase
   user_id: number;
   // eslint-disable-next-line camelcase
-  current_time: number;
+  current_time_in_second: number;
   // eslint-disable-next-line camelcase
-  formatted_time: string;
+  current_time_formatted: string;
   events: any[];
   status: 'RUNNING' | 'STOPPED';
 };
