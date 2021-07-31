@@ -53,6 +53,7 @@ export abstract class AbstractResourceService<T, U> {
         data: createDto,
       });
 
+      this.displayService.displaySuccess(`${this.resourceName} with id "${result.data.id}" was created`);
       return result.data;
     } catch (error) {
       this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
@@ -75,16 +76,13 @@ export abstract class AbstractResourceService<T, U> {
     }
   }
 
-  async getAll(topResourceId?: number): Promise<T[]> {
-    const apiUrl = this.isSubResource
-      ? `${this.apiUrl}/${topResourceId}`
-      : this.apiUrl;
-
+  async getAll(parameters = {}): Promise<T[]> {
+    const queryString = new URLSearchParams(parameters).toString();
     try {
       const headers = await this.httpService.getAuthHeaders();
       const result = await axios({
         method: 'GET',
-        url: apiUrl,
+        url: `${this.apiUrl}?${queryString}`,
         headers,
       });
 
@@ -130,12 +128,12 @@ export abstract class AbstractResourceService<T, U> {
     }
   }
 
-  async select(idOnly = true): Promise<number | T> {
-    const resources = await this.getAll();
+  async select(idOnly = true, parameters?: object): Promise<number | T> {
+    const resources = await this.getAll(parameters);
 
     const choices = resources.map((resource: T) => ({
       // @ts-ignore
-      name: `${resource.id} | ${resource.name}`,
+      name: this.formatSelectName(resource),
       // @ts-ignore
       value: idOnly ? resource.id : resource,
     }));
@@ -160,5 +158,11 @@ export abstract class AbstractResourceService<T, U> {
     } catch (error) {
       this.displayService.displayError('An error occurred');
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatSelectName(resource: T): string {
+    // @ts-ignore
+    return `${resource.id} | ${resource.name}`;
   }
 }
