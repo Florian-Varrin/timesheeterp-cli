@@ -33,6 +33,7 @@ USAGE
 * [`tser clocks:delete`](#tser-clocksdelete)
 * [`tser clocks:edit`](#tser-clocksedit)
 * [`tser clocks:list`](#tser-clockslist)
+* [`tser clocks:reset`](#tser-clocksreset)
 * [`tser clocks:start`](#tser-clocksstart)
 * [`tser clocks:stop`](#tser-clocksstop)
 * [`tser config`](#tser-config)
@@ -80,6 +81,7 @@ USAGE
 
 OPTIONS
   -n, --name=name  name of the clock
+  -s, --start      Start the clock after creation
 
 ALIASES
   $ tser clock:create
@@ -149,6 +151,24 @@ ALIASES
 ```
 
 _See code: [src/commands/clocks/list.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/list.ts)_
+
+## `tser clocks:reset`
+
+reset a clock
+
+```
+USAGE
+  $ tser clocks:reset
+
+OPTIONS
+  --id=id  Id of the clock
+
+ALIASES
+  $ tser clock:reset
+  $ tser clk:reset
+```
+
+_See code: [src/commands/clocks/reset.ts](https://github.com/Florian-Varrin/timesheeter-cli/blob/v0.1.2/src/commands/clocks/reset.ts)_
 
 ## `tser clocks:start`
 

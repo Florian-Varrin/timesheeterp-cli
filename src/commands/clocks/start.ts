@@ -17,8 +17,8 @@ export default class ClocksStart extends Command {
     const clocksService = new ClocksService(this);
 
     const clock = id
-      ? await clocksService.get(Number(id)) as ClocksType
-      : await clocksService.select(false, { status: 'stopped' }) as ClocksType;
+      ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
+      : await clocksService.select(false, { status: 'stopped', hydrated: false }) as ClocksType;
 
     await clocksService.start(clock.id);
   }
