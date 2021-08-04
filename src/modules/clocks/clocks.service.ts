@@ -71,6 +71,26 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
     }
   }
 
+  async reset(id: number) {
+    try {
+      const headers = await this.httpService.getAuthHeaders();
+
+      const result = await axios({
+        method: 'POST',
+        url: `${this.apiUrl}/${id}/reset`,
+        headers,
+      });
+
+      if (result.status !== 201) throw new Error('An error occurred');
+
+      const { status } = result.data;
+
+      this.displayService.displaySuccess(`Clock with id "${id}" resetted, clock is ${status.toLowerCase()}`);
+    } catch (error) {
+      this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   formatSelectName(resource: ClocksType): string {
     return `${super.formatSelectName(resource)} | ${resource.current_time_formatted} | ${resource.status}`;

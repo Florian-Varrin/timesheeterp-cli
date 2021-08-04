@@ -60,12 +60,13 @@ export abstract class AbstractResourceService<T, U> {
     }
   }
 
-  async get(id: number): Promise<T | null> {
+  async get(id: number, parameters = {}): Promise<T | null> {
     try {
+      const queryString = new URLSearchParams(parameters).toString();
       const headers = await this.httpService.getAuthHeaders();
       const result = await axios({
         method: 'GET',
-        url: `${this.apiUrl}/${id}`,
+        url: `${this.apiUrl}/${id}?${queryString}`,
         headers,
       });
 
