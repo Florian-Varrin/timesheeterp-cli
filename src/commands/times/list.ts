@@ -47,6 +47,7 @@ export default class TimesGet extends Command {
       });
     }
 
-    await timeService.list(times, project, flags);
+    const formattedResources = timeService.formatResourceForListing(times, project);
+    await timeService.list(formattedResources, flags);
   }
 }

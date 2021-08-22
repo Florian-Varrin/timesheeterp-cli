@@ -52,9 +52,12 @@ export abstract class AbstractResourceService<T, U> {
     return new Timesheeterp(this.host, this.apiVersion, accessToken);
   }
 
-  async select(idOnly = true, parameters = {}): Promise<number | T> {
+  async select(idOnly = true, getAllParameters?: any[], parameters = {}): Promise<number | T> {
+    const resources = getAllParameters
+      // @ts-ignore
+      ? await this.getAll(...getAllParameters as [], parameters)
     // @ts-ignore
-    const resources = await this.getAll(parameters);
+      : await this.getAll(parameters);
 
     const choices = resources.map((resource: T) => ({
       // @ts-ignore

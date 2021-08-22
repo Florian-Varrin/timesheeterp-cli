@@ -19,7 +19,7 @@ export default class ClocksReset extends Command {
 
     const clock = id
       ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
-      : await clocksService.select(false, { hydrated: false }) as ClocksType;
+      : await clocksService.select(false, [], { hydrated: false }) as ClocksType;
 
     await clocksService.reset(clock.id);
 

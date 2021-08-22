@@ -29,8 +29,8 @@ export default class ClockCreate extends Command {
 
     const clocksService = new ClocksService(this);
 
-    const clock: ClocksType = await clocksService.create({ name: name || answers.name });
+    const clock = await clocksService.create({ name: name || answers.name }) as ClocksType;
 
-    if (start) await clocksService.start(clock.id);
+    if (clock && start) await clocksService.start(clock.id);
   }
 }
