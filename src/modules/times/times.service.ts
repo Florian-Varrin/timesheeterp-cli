@@ -2,6 +2,7 @@ import { Command } from '@oclif/command';
 import { TimeCreateDto, TimeType } from './time.type';
 import { AbstractResourceService } from '../abstract/abstract-resource.service';
 import { CreateTimeDto } from '../../../../timesheeterp-client-js-sdk/dist/timesheet/times/dto/create-time.dto';
+import { ProjectType } from '../projects/project.type';
 
 export class TimesService
   extends AbstractResourceService<TimeType, CreateTimeDto>
@@ -100,5 +101,14 @@ export class TimesService
     } catch (error) {
       this.displayError(error);
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatResourceForListing(times: TimeType[], project: ProjectType): any {
+    return times.map((time) => ({
+      ...time,
+      project_name: project.name,
+      project_hour_rate: project.hour_rate,
+    }));
   }
 }
