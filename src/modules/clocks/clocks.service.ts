@@ -1,13 +1,10 @@
 import { Command } from '@oclif/command';
-import axios from 'axios';
-import { AbstractResourceService } from '../common/abstract-resource.service';
+import { AbstractResourceService } from '../abstract/abstract-resource.service';
 import { ClocksCreateDto, ClocksType } from './clocks.type';
 
 export class ClocksService extends AbstractResourceService<ClocksType, ClocksCreateDto> {
   constructor(protected oclifContext: Command) {
     super(oclifContext);
-
-    this.apiUrl += 'clocks';
 
     this.resourceName = 'Clock';
 
@@ -31,63 +28,103 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
     };
   }
 
-  async start(id: number) {
+  async create(createDto: ClocksCreateDto): Promise<ClocksType | null> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
+      const client = await this.createClient();
+      const clock = await client.clockService.create(createDto);
 
-      const result = await axios({
-        method: 'POST',
-        url: `${this.apiUrl}/${id}/start`,
-        headers,
-      });
+      this.displayService.displaySuccess(`${this.resourceName} with id "${clock.id}" was created`);
 
-      if (result.status !== 201) throw new Error('An error occurred');
-
-      const { current_time_formatted: currentTime } = result.data;
-
-      this.displayService.displaySuccess(`Clock with id "${id}" started, current time is ${currentTime}`);
+      return clock;
     } catch (error) {
-      this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
+      this.displayError(error);
+
+      return null;
     }
   }
 
-  async stop(id: number) {
+  async get(clockId: number, parameters = {}): Promise<ClocksType | null> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
+      const client = await this.createClient();
 
-      const result = await axios({
-        method: 'POST',
-        url: `${this.apiUrl}/${id}/stop`,
-        headers,
-      });
-
-      if (result.status !== 201) throw new Error('An error occurred');
-
-      const { current_time_formatted: currentTime } = result.data;
-
-      this.displayService.displaySuccess(`Clock with id "${id}" stopped, current time is ${currentTime}`);
+      return client.clockService.findOneById(clockId, parameters);
     } catch (error) {
-      this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
+      this.displayError(error);
+
+      return null;
     }
   }
 
-  async reset(id: number) {
+  async getAll(parameters = {}): Promise<ClocksType[]> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
+      const client = await this.createClient();
 
-      const result = await axios({
-        method: 'POST',
-        url: `${this.apiUrl}/${id}/reset`,
-        headers,
-      });
-
-      if (result.status !== 201) throw new Error('An error occurred');
-
-      const { status } = result.data;
-
-      this.displayService.displaySuccess(`Clock with id "${id}" resetted, clock is ${status.toLowerCase()}`);
+      return client.clockService.findAll(parameters);
     } catch (error) {
-      this.displayService.displayError(error.response.data.message || error.toString() || 'An unknown error occurred');
+      this.displayError(error);
+
+      return [];
+    }
+  }
+
+  async update(clockId: number, clock: ClocksType): Promise<void> {
+    try {
+      const client = await this.createClient();
+      await client.projectService.update(clockId, clock);
+
+      this.displayService.displaySuccess(`${this.resourceName} with id "${clockId}" deleted`);
+    } catch (error) {
+      this.displayError(error);
+    }
+  }
+
+  async delete(clockId: number): Promise<void> {
+    try {
+      const client = await this.createClient();
+      await client.clockService.remove(clockId);
+
+      this.displayService.displaySuccess(`${this.resourceName} with id "${clockId}" deleted`);
+    } catch (error) {
+      this.displayError(error);
+    }
+  }
+
+  async start(clockId: number) {
+    try {
+      const client = await this.createClient();
+      const clock = await client.clockService.start(clockId);
+
+      const { current_time_formatted: currentTime } = clock;
+
+      this.displayService.displaySuccess(`Clock with id "${clockId}" started, current time is ${currentTime}`);
+    } catch (error) {
+      this.displayError(error);
+    }
+  }
+
+  async stop(clockId: number) {
+    try {
+      const client = await this.createClient();
+      const clock = await client.clockService.stop(clockId);
+
+      const { current_time_formatted: currentTime } = clock;
+
+      this.displayService.displaySuccess(`Clock with id "${clockId}" stopped, current time is ${currentTime}`);
+    } catch (error) {
+      this.displayError(error);
+    }
+  }
+
+  async reset(clockId: number) {
+    try {
+      const client = await this.createClient();
+      const clock = await client.clockService.stop(clockId);
+
+      const { status } = clock;
+
+      this.displayService.displaySuccess(`Clock with id "${clockId}" resetted, clock is ${status.toLowerCase()}`);
+    } catch (error) {
+      this.displayError(error);
     }
   }
 

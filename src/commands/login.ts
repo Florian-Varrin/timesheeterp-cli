@@ -18,21 +18,27 @@ export default class Login extends Command {
     const configService = new ConfigService(this);
     const displayService = new DisplayService(this);
 
-    const { host, apiVersion } = await configService.getAllConfig();
+    const configEmail = await configService.getAConfig('._email');
 
-    const questions = [
-      {
+    const questions: {
+      type: string;
+      name: string;
+      message: string;
+      default?: string;
+    }[] = [];
+
+    questions.push({
+      type: 'input',
+      name: 'email',
+      message: 'email: ',
+      default: `${configEmail || ''}`,
+    });
+
+    if (!account) {
+      questions.push({
         type: 'password',
         name: 'password',
         message: 'password: ',
-      },
-    ];
-
-    if (!account) {
-      questions.unshift({
-        type: 'input',
-        name: 'email',
-        message: 'email: ',
       });
     }
 
@@ -41,8 +47,7 @@ export default class Login extends Command {
 
     const { email, password } = answers;
 
-    const apiUrl = `${host}/api/v${apiVersion}`;
-    await loginService.login(email || account, password, apiUrl);
+    await loginService.login(email || account, password);
 
     displayService.displaySuccess('You are logged in');
   }

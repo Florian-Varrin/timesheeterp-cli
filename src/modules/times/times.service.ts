@@ -1,178 +1,104 @@
 import { Command } from '@oclif/command';
-import axios from 'axios';
-import { cli } from 'cli-ux';
-import * as inquirer from 'inquirer';
-import { TimeType } from './time.type';
-import { HttpService } from '../common/http.service';
-import { DisplayService } from '../common/display.service';
-import { ConfigService } from '../config/config.service';
-import { LoginService } from '../login/login.service';
-import { ProjectType } from '../projects/project.type';
+import { TimeCreateDto, TimeType } from './time.type';
+import { AbstractResourceService } from '../abstract/abstract-resource.service';
+import { CreateTimeDto } from '../../../../timesheeterp-client-js-sdk/dist/timesheet/times/dto/create-time.dto';
 
-export class TimesService {
-  private readonly apiUrl: string;
+export class TimesService
+  extends AbstractResourceService<TimeType, CreateTimeDto>
+  implements SubresourceCrudInterface<TimeType, CreateTimeDto> {
+  constructor(protected oclifContext: Command) {
+    super(oclifContext);
 
-  private displayService: DisplayService;
+    this.resourceName = 'Time';
 
-  private configService: ConfigService;
-
-  private loginService: LoginService;
-
-  private httpService: HttpService;
-
-  constructor(private oclifContext: Command) {
-    this.displayService = new DisplayService(oclifContext);
-    this.configService = new ConfigService(oclifContext);
-    this.loginService = new LoginService(oclifContext);
-    this.httpService = new HttpService(oclifContext);
-
-    const { host, apiVersion } = this.configService.getAllConfig();
-
-    this.apiUrl = `${host}/api/v${apiVersion}/projects`;
+    this.columns = {
+      id: {
+        header: 'ID',
+        minWidth: 10,
+      },
+      project_name: {
+        header: 'PROJECT NAME',
+        extended: true,
+        minWidth: 15,
+      },
+      project_hour_rate: {
+        header: 'HOUR RATE',
+        extended: true,
+        minWidth: 10,
+      },
+      date: {
+        header: 'DATE',
+        minWidth: 15,
+      },
+      duration: {
+        header: 'DURATION',
+        minWidth: 10,
+      },
+      description: {
+        header: 'DESCRIPTION',
+        minWidth: 45,
+      },
+    };
   }
 
-  async create(projectId: number, time: TimeType): Promise<TimeType | null> {
+  async create(projectId: number, createDto: TimeCreateDto): Promise<TimeType | null> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
-      const result = await axios({
-        method: 'POST',
-        url: `${this.apiUrl}/${projectId}/times`,
-        headers,
-        data: time,
-      });
+      const client = await this.createClient();
+      const time = await client.timeService.create(projectId, createDto);
 
-      return result.data;
+      this.displayService.displaySuccess(`${this.resourceName} with id "${time.id}" was created`);
+
+      return time;
     } catch (error) {
-      this.displayService.displayError(error.toString() || 'An unknown error occurred');
+      this.displayError(error);
+
       return null;
     }
   }
 
-  async get(projectId: number, timeId: number): Promise<TimeType | null> {
+  async get(projectId: number, clockId: number, parameters = {}): Promise<TimeType | null> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
-      const result = await axios({
-        method: 'GET',
-        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
-        headers,
-      });
+      const client = await this.createClient();
 
-      return result.data;
+      return client.timeService.findOneById(projectId, clockId, parameters);
     } catch (error) {
-      this.displayService.displayError(error.toString());
+      this.displayError(error);
+
       return null;
     }
   }
 
-  async getAll(projectId: number): Promise<TimeType[]> {
+  async getAll(projectId: number, parameters = {}): Promise<TimeType[]> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
-      const result = await axios({
-        method: 'GET',
-        url: `${this.apiUrl}/${projectId}/times`,
-        headers,
-      });
+      const client = await this.createClient();
 
-      return result.data;
+      return client.timeService.findAll(projectId, parameters);
     } catch (error) {
-      this.displayService.displayError(error.toString() || 'An unknown error occurred');
+      this.displayError(error);
+
       return [];
     }
   }
 
-  async select(idOnly = true, projectId: number): Promise<number | TimeType> {
-    const times = await this.getAll(projectId);
-
-    const choices = times.map((time: TimeType) => ({
-      name: `${time.id} | ${time.description} (${time.duration})`,
-      value: idOnly ? time.id : time,
-    }));
-
-    const { time } = await inquirer.prompt({
-      type: 'list',
-      name: 'time',
-      choices,
-    });
-
-    return time;
-  }
-
-  async update(projectId: number, timeId: number, time: TimeType) {
+  async update(projectId: number, timeId: number, time: TimeType): Promise<void> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
-      const result = await axios({
-        method: 'PATCH',
-        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
-        headers,
-        data: time,
-      });
+      const client = await this.createClient();
+      await client.timeService.update(projectId, timeId, time);
 
-      if (result.status !== 200) throw new Error('An error occurred');
-
-      this.displayService.displaySuccess(`Time with id "${timeId}" edited`);
+      this.displayService.displaySuccess(`${this.resourceName} with id "${timeId}" deleted`);
     } catch (error) {
-      this.displayService.displayError('An error occurred');
+      this.displayError(error);
     }
   }
 
-  async delete(projectId: number, timeId: number) {
+  async delete(projectId: number, timeId: number): Promise<void> {
     try {
-      const headers = await this.httpService.getAuthHeaders();
-      const result = await axios({
-        method: 'DELETE',
-        url: `${this.apiUrl}/${projectId}/times/${timeId}`,
-        headers,
-      });
+      const client = await this.createClient();
+      await client.timeService.remove(projectId, timeId);
 
-      if (result.status !== 204) throw new Error('An error occured');
-
-      this.displayService.displaySuccess(`Project with id "${timeId}" deleted`);
+      this.displayService.displaySuccess(`${this.resourceName} with id "${timeId}" deleted`);
     } catch (error) {
-      this.displayService.displayError('An error occurred');
-    }
-  }
-
-  async list(times: TimeType[], project: ProjectType, flags: import('cli-ux/lib/styled/table').table.Options) {
-    try {
-      const joinedTimes = times.map((time) => ({
-        ...time,
-        project_name: project.name,
-        project_hour_rate: project.hour_rate,
-      }));
-
-      cli.table(joinedTimes, {
-        id: {
-          header: 'ID',
-          minWidth: 10,
-        },
-        project_name: {
-          header: 'PROJECT NAME',
-          extended: true,
-          minWidth: 15,
-        },
-        project_hour_rate: {
-          header: 'HOUR RATE',
-          extended: true,
-          minWidth: 10,
-        },
-        date: {
-          header: 'DATE',
-          minWidth: 15,
-        },
-        duration: {
-          header: 'DURATION',
-          minWidth: 10,
-        },
-        description: {
-          header: 'DESCRIPTION',
-          minWidth: 45,
-        },
-      }, {
-        printLine: this.oclifContext.log,
-        ...flags,
-      });
-    } catch (error) {
-      this.displayService.displayError('An error occurred');
+      this.displayError(error);
     }
   }
 }

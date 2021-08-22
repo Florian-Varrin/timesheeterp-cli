@@ -1,8 +1,8 @@
 import { Command } from '@oclif/command';
 import * as keytar from 'keytar';
-import axios from 'axios';
 import { ConfigService } from '../config/config.service';
 import { DisplayService } from '../common/display.service';
+import Timesheeterp from '../../../../timesheeterp-client-js-sdk';
 
 export class LoginService {
   private readonly serviceName: string;
@@ -38,33 +38,34 @@ export class LoginService {
     return accessToken;
   }
 
-  async login(email: string, password: string, apiUrl: string): Promise<void> {
-    const data: { email?: string; password: string } = { email, password };
-
+  async login(email: string, password: string): Promise<void> {
     try {
-      const result = await axios({
-        method: 'POST',
-        url: `${apiUrl}/login`,
-        data,
-      });
+      const { host, apiVersion } = this.configService.getAllConfig();
+      const client = new Timesheeterp(host, +apiVersion);
 
-      const { accessToken } = result.data;
+      const accessToken = await client.authService.login({ email, password });
 
       if (accessToken) {
         await this.storeAccessToken(email, accessToken);
         await this.configService.setAConfig('._email', email);
       }
+
+      return;
     } catch (error) {
       if (!error.response) {
         this.displayService.displayError(
           'Unable to reach the server, please verify host url and api version by running',
           'tser config',
         );
+        return;
       }
 
       const statusCode = error.response.status;
 
-      if (statusCode === 401) this.displayService.displayError('Invalid credentials');
+      if (statusCode === 401) {
+        this.displayService.displayError('Invalid credentials');
+        return;
+      }
 
       this.displayService.displayError('An unknown error occurred, please retry');
     }

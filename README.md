@@ -161,7 +161,8 @@ USAGE
   $ tser clocks:reset
 
 OPTIONS
-  --id=id  Id of the clock
+  -s, --start  Start the clock after reset
+  --id=id      Id of the clock
 
 ALIASES
   $ tser clock:reset
