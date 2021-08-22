@@ -27,7 +27,7 @@ export default class TimesEdit extends Command {
 
     const time = timeId
       ? await timeService.get(projectId, timeId) as TimeType
-      : await timeService.select(false, projectId) as TimeType;
+      : await timeService.select(false, [projectId]) as TimeType;
 
     const editedTime: TimeType = {
       ...await inquirer.prompt([

@@ -18,7 +18,7 @@ export default class ClocksStop extends Command {
 
     const clock = id
       ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
-      : await clocksService.select(false, { status: 'stopped', hydrated: false }) as ClocksType;
+      : await clocksService.select(false, [], { status: 'stopped', hydrated: false }) as ClocksType;
 
     await clocksService.stop(clock.id);
   }

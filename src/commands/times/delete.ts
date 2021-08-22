@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command';
+import * as inquirer from 'inquirer';
 import { DisplayService } from '../../modules/common/display.service';
 import { ProjectsService } from '../../modules/projects/projects.service';
-import * as inquirer from 'inquirer';
 import { TimesService } from '../../modules/times/times.service';
 
 export default class TimesDelete extends Command {
@@ -28,7 +28,7 @@ export default class TimesDelete extends Command {
     }
 
     if (!timeId) {
-      timeId = await timeService.select(true, projectId) as number;
+      timeId = await timeService.select(true, [projectId]) as number;
     }
 
     if (!force) {

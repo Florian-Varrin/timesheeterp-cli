@@ -111,4 +111,10 @@ export class TimesService
       project_hour_rate: project.hour_rate,
     }));
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatSelectName(time: TimeType): string {
+    // @ts-ignore
+    return `${time.id} | ${time.description}`;
+  }
 }
