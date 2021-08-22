@@ -1,7 +1,7 @@
 {
   "name": "timesheeter-cli",
   "description": "CLI client for TimeSheetER",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Florian Varrin @Florian-Varrin",
   "bin": {
     "tser": "bin/run"
@@ -18,9 +18,9 @@
     "cli-ux": "^5.6.2",
     "inquirer": "^7.3.3",
     "keytar": "^7.3.0",
+    "timesheeterp-sdk": "link:/home/fvarrin/timesheeterp-client-js-sdk",
     "ts-transformer-keys": "^0.4.3",
-    "tslib": "^1",
-    "timesheeterp-sdk": "link:/home/fvarrin/timesheeterp-client-js-sdk"
+    "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
