@@ -18,7 +18,7 @@
     "cli-ux": "^5.6.2",
     "inquirer": "^7.3.3",
     "keytar": "^7.3.0",
-    "timesheeterp-sdk": "link:/home/fvarrin/timesheeterp-client-js-sdk",
+    "timesheeterp-js-sdk": "^0.1.0",
     "ts-transformer-keys": "^0.4.3",
     "tslib": "^1"
   },
