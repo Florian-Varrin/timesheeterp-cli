@@ -2872,9 +2872,13 @@ through@^2.3.6:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
-"timesheeterp-sdk@link:../../../timesheeterp-client-js-sdk":
-  version "0.0.0"
-  uid ""
+timesheeterp-js-sdk@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/timesheeterp-js-sdk/-/timesheeterp-js-sdk-0.1.0.tgz#17caa3f431cbbc1974fa61011b99514bff554eb0"
+  integrity sha512-l9UDuSZQicfT+UQLHJXvkIR3W797gUwgoo7eeQNKoSqzpoR9JRYXSMiKYSuPS4X//gN2YRjd1Nh6Qq7Q0DipAA==
+  dependencies:
+    axios "^0.21.1"
+    class-validator "^0.13.1"
 
 tmp@^0.0.33:
   version "0.0.33"

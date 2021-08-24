@@ -1,7 +1,7 @@
 import { Command } from '@oclif/command';
 import * as inquirer from 'inquirer';
 import { cli } from 'cli-ux';
-import Timesheeterp, { AxiosError } from 'timesheeterp-sdk';
+import Timesheeterp, { AxiosError } from 'timesheeterp-js-sdk';
 import { DisplayService } from '../common/display.service';
 import { ConfigService } from '../config/config.service';
 import { LoginService } from '../login/login.service';
