@@ -1,12 +1,11 @@
 import { Command } from '@oclif/command';
 import { TimeCreateDto, TimeType } from './time.type';
 import { AbstractResourceService } from '../abstract/abstract-resource.service';
-import { CreateTimeDto } from '../../../../timesheeterp-client-js-sdk/dist/timesheet/times/dto/create-time.dto';
 import { ProjectType } from '../projects/project.type';
 
 export class TimesService
-  extends AbstractResourceService<TimeType, CreateTimeDto>
-  implements SubresourceCrudInterface<TimeType, CreateTimeDto> {
+  extends AbstractResourceService<TimeType, TimeCreateDto>
+  implements SubresourceCrudInterface<TimeType, TimeCreateDto> {
   constructor(protected oclifContext: Command) {
     super(oclifContext);
 
