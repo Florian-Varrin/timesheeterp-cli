@@ -1,8 +1,8 @@
 import { Command } from '@oclif/command';
 import * as keytar from 'keytar';
+import Timesheeterp from 'timesheeterp-js-sdk';
 import { ConfigService } from '../config/config.service';
 import { DisplayService } from '../common/display.service';
-import Timesheeterp from '../../../../timesheeterp-client-js-sdk';
 
 export class LoginService {
   private readonly serviceName: string;
