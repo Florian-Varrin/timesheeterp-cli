@@ -118,7 +118,7 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
   async reset(clockId: number) {
     try {
       const client = await this.createClient();
-      const clock = await client.clockService.stop(clockId);
+      const clock = await client.clockService.reset(clockId);
 
       const { status } = clock;
 
