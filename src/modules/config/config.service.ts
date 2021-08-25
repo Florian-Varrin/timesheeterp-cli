@@ -29,12 +29,13 @@ export class ConfigService {
     return fs.existsSync(this.filePath);
   }
 
-  async getAConfig(config: string) {
+  async getAConfig(config: string, nullIfDoesNotExist = false) {
     if (!this.hasConfigFile()) this.displayNeedToConfigure();
 
     // @ts-ignore
     const content = await this.getAllConfig(true);
 
+    if (!content[config] && nullIfDoesNotExist) return null;
     if (!content[config]) this.displayNeedToConfigure();
 
     return content[config];
