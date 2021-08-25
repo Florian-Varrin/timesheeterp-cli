@@ -18,7 +18,7 @@ export default class Login extends Command {
     const configService = new ConfigService(this);
     const displayService = new DisplayService(this);
 
-    const configEmail = await configService.getAConfig('._email');
+    const configEmail = await configService.getAConfig('._email', true);
 
     const questions: {
       type: string;
