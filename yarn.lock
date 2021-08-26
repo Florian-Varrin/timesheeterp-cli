@@ -1274,9 +1274,9 @@ flatted@^2.0.0:
   integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
 follow-redirects@^1.10.0:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
-  integrity sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.2.tgz#cecb825047c00f5e66b142f90fed4f515dec789b"
+  integrity sha512-yLR6WaE2lbF0x4K2qE2p9PEXKLDjUjnR/xmjS3wHAYxtlsI9MLLBJUZirAHKzUZDGLxje7w/cXR49WOUo4rbsA==
 
 fs-constants@^1.0.0:
   version "1.0.0"
@@ -1809,9 +1809,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 libphonenumber-js@^1.9.7:
-  version "1.9.23"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.23.tgz#e28babdaaaf7e09fbaf23a1c714166fa63001ea3"
-  integrity sha512-+qWSwPyJWSV9ukb7Iu21WpWEP7irFWR1ojoYykL2itAfXKj9FjsTjS6PPZoPUOZk+1kxliHjwsilqA1TNeOhuQ==
+  version "1.9.25"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.25.tgz#e54b570f03d36ce059a88ab01ec49b9037ec1c97"
+  integrity sha512-LsSjcmXXGujESsrOsF2rrLdmuABj3OluCzPJKVNslJ2qc7xF5KdKXN8y0OcxHVurqosVf1/r4itrVrKSrlbVHA==
 
 lines-and-columns@^1.1.6:
   version "1.1.6"
@@ -2873,9 +2873,9 @@ through@^2.3.6:
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
 timesheeterp-js-sdk@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/timesheeterp-js-sdk/-/timesheeterp-js-sdk-0.1.0.tgz#17caa3f431cbbc1974fa61011b99514bff554eb0"
-  integrity sha512-l9UDuSZQicfT+UQLHJXvkIR3W797gUwgoo7eeQNKoSqzpoR9JRYXSMiKYSuPS4X//gN2YRjd1Nh6Qq7Q0DipAA==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/timesheeterp-js-sdk/-/timesheeterp-js-sdk-0.1.2.tgz#71d6191d30f6c3084cf38e84f0dd447ef700fdfc"
+  integrity sha512-Evu8KvCB1dr1ApSMPrCjcUy0ihBAIkSEwsu4Z6eDgj4+6n3n/AIRsCex1TVOyabFWpZTytjvuqzesZG5HE/npQ==
   dependencies:
     axios "^0.21.1"
     class-validator "^0.13.1"

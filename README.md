@@ -82,6 +82,7 @@ USAGE
 OPTIONS
   -n, --name=name  name of the clock
   -s, --start      Start the clock after creation
+  --stop-all       Stop all other clocks
 
 ALIASES
   $ tser clock:create
@@ -180,7 +181,8 @@ USAGE
   $ tser clocks:start
 
 OPTIONS
-  --id=id  Id of the clock
+  --id=id     Id of the clock
+  --stop-all  Stop all other clocks
 
 ALIASES
   $ tser clock:start
@@ -198,6 +200,7 @@ USAGE
   $ tser clocks:stop
 
 OPTIONS
+  --all    Stop all clocks
   --id=id  Id of the clock
 
 ALIASES

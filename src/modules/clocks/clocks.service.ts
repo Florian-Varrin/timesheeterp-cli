@@ -115,6 +115,20 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
     }
   }
 
+  async stopAll() {
+    try {
+      const client = await this.createClient();
+      const clocks = await client.clockService.stopAll();
+
+      clocks.forEach((clock) => {
+        const { current_time_formatted: currentTime } = clock;
+        this.displayService.displaySuccess(`Clock with id "${clock.id}" stopped, current time is ${currentTime}`);
+      });
+    } catch (error) {
+      this.displayError(error);
+    }
+  }
+
   async reset(clockId: number) {
     try {
       const client = await this.createClient();
@@ -122,7 +136,7 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
 
       const { status } = clock;
 
-      this.displayService.displaySuccess(`Clock with id "${clockId}" resetted, clock is ${status.toLowerCase()}`);
+      this.displayService.displaySuccess(`Clock with id "${clockId}" has been reset, clock is ${status.toLowerCase()}`);
     } catch (error) {
       this.displayError(error);
     }
