@@ -11,10 +11,11 @@ export default class ClockCreate extends Command {
   static flags = {
     name: flags.string({ char: 'n', description: 'name of the clock' }),
     start: flags.boolean({ char: 's', description: 'Start the clock after creation', default: false }),
+    'stop-all': flags.boolean({ description: 'Stop all other clocks' }),
   };
 
   async run() {
-    const { name, start } = this.parse(ClockCreate).flags;
+    const { name, start, 'stop-all': stopAll } = this.parse(ClockCreate).flags;
 
     const questions = [];
     if (!name) {
@@ -28,6 +29,10 @@ export default class ClockCreate extends Command {
     const answers = await inquirer.prompt(questions);
 
     const clocksService = new ClocksService(this);
+
+    if (stopAll) {
+      await clocksService.stopAll();
+    }
 
     const clock = await clocksService.create({ name: name || answers.name }) as ClocksType;
 

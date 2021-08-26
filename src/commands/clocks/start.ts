@@ -9,10 +9,11 @@ export default class ClocksStart extends Command {
 
   static flags = {
     id: flags.integer({ description: 'Id of the clock' }),
+    'stop-all': flags.boolean({ description: 'Stop all other clocks' }),
   };
 
   async run() {
-    const { id } = this.parse(ClocksStart).flags;
+    const { id, 'stop-all': stopAll } = this.parse(ClocksStart).flags;
 
     const clocksService = new ClocksService(this);
 
@@ -20,6 +21,9 @@ export default class ClocksStart extends Command {
       ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
       : await clocksService.select(false, [], { status: 'stopped', hydrated: false }) as ClocksType;
 
+    if (stopAll) {
+      await clocksService.stopAll();
+    }
     await clocksService.start(clock.id);
   }
 }
