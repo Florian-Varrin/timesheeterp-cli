@@ -13,12 +13,10 @@ export default class ClocksReset extends Command {
     all: flags.boolean({ description: 'Reset all clocks' }),
   };
 
-  // eslint-disable-next-line class-methods-use-this
   async resetAll(clocksService: ClocksService): Promise<ClocksType[]> {
     return clocksService.resetAll();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async resetOne(clocksService: ClocksService, id: number|undefined): Promise<ClocksType | null> {
     const clock = id
       ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
