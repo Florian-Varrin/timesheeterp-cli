@@ -11,6 +11,7 @@
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "class-methods-use-this": "off"
   }
 }
