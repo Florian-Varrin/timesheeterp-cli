@@ -1,25 +1,24 @@
-timesheeter-cli
-===============
+# TimesheetERP
+TimesheetERP is an open source ERP created primarily for developers. Besides being made for a need, it is a project made mostly for fun. But feel free to use it.  
+The primary goal was to be able to use this ERP via the CLI to not lose productivity by switching tool too often.
 
-CLI client for TimeSheetER
+At the moment it includes the possibility to create timers to identify what time is spent on each task and to assign times to different projects.
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/timesheeter-cli.svg)](https://npmjs.org/package/timesheeter-cli)
-[![Downloads/week](https://img.shields.io/npm/dw/timesheeter-cli.svg)](https://npmjs.org/package/timesheeter-cli)
-[![License](https://img.shields.io/npm/l/timesheeter-cli.svg)](https://github.com/Florian-Varrin/timesheeter-cli/blob/master/package.json)
+## Technology
+This repository is the CLI client part of the application and was written with Typescript ❤ using the [oclif](https://oclif.io/) framework and run on [NodeJS](https://nodejs.org/en/). It uses the [JS client library](https://github.com/Florian-Varrin/timesheeterp-client-js-sdk).
 
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+## Server
+Running the [server](https://github.com/Florian-Varrin/timesheeterp-server) is needed to use this CLI as nothing is stored locally. 
 <!-- tocstop -->
 # Usage
+This is a hobby projet and not a production ready solution, there are certainly bugs. Do not hesitate to open issues if you encounter some.
 <!-- usage -->
 ```sh-session
 $ npm install -g timesheeter-cli
 $ tser COMMAND
 running command...
 $ tser (-v|--version|version)
-timesheeter-cli/0.1.5 linux-x64 node-v12.21.0
+timesheeter-cli/0.1.5 linux-x64 node-v16.14.2
 $ tser --help [COMMAND]
 USAGE
   $ tser COMMAND
@@ -163,6 +162,7 @@ USAGE
 
 OPTIONS
   -s, --start  Start the clock after reset
+  --all        Reset all clocks
   --id=id      Id of the clock
 
 ALIASES
