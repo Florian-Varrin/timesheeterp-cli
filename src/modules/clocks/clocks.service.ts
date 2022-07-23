@@ -67,14 +67,17 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
     }
   }
 
-  async update(clockId: number, clock: ClocksType): Promise<void> {
+  async update(clockId: number, clock: ClocksType): Promise<ClocksType|null> {
     try {
       const client = await this.createClient();
-      await client.projectService.update(clockId, clock);
+      const updatedClock = await client.clockService.update(clockId, clock);
 
       this.displayService.displaySuccess(`${this.resourceName} with id "${clockId}" deleted`);
+
+      return updatedClock;
     } catch (error) {
       this.displayError(error);
+      return null;
     }
   }
 
@@ -129,7 +132,7 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
     }
   }
 
-  async reset(clockId: number) {
+  async reset(clockId: number): Promise<ClocksType | null> {
     try {
       const client = await this.createClient();
       const clock = await client.clockService.reset(clockId);
@@ -137,8 +140,27 @@ export class ClocksService extends AbstractResourceService<ClocksType, ClocksCre
       const { status } = clock;
 
       this.displayService.displaySuccess(`Clock with id "${clockId}" has been reset, clock is ${status.toLowerCase()}`);
+      return clock;
     } catch (error) {
       this.displayError(error);
+      return null;
+    }
+  }
+
+  async resetAll(): Promise<ClocksType[]> {
+    try {
+      const client = await this.createClient();
+      const clocks = await client.clockService.resetAll();
+
+      clocks.forEach((clock) => {
+        const { status } = clock;
+        this.displayService.displaySuccess(`Clock with id "${clock.id}" has been reset, clock is ${status.toLowerCase()}`);
+      });
+
+      return clocks;
+    } catch (error) {
+      this.displayError(error);
+      return [];
     }
   }
 

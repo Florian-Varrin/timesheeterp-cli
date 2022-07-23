@@ -10,10 +10,11 @@ export default class ClocksReset extends Command {
   static flags = {
     id: flags.integer({ description: 'Id of the clock' }),
     start: flags.boolean({ char: 's', description: 'Start the clock after reset', default: false }),
+    all: flags.boolean({ description: 'Reset all clocks' }),
   };
 
   async run() {
-    const { id, start } = this.parse(ClocksReset).flags;
+    const { id, start, all } = this.parse(ClocksReset).flags;
 
     const clocksService = new ClocksService(this);
 
@@ -21,8 +22,14 @@ export default class ClocksReset extends Command {
       ? await clocksService.get(Number(id), { hydrated: false }) as ClocksType
       : await clocksService.select(false, [], { hydrated: false }) as ClocksType;
 
-    await clocksService.reset(clock.id);
+    const resetClocks = all
+      ? await clocksService.resetAll()
+      : [await clocksService.reset(clock.id)];
 
-    if (clock.status !== 'RUNNING' && start) await clocksService.start(clock.id);
+    const promises = resetClocks.map((clock) => {
+      if (clock && clock.status !== 'RUNNING' && start) return clocksService.start(clock.id);
+      return null;
+    });
+    await Promise.all(promises);
   }
 }
